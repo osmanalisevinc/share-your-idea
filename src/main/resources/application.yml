@@ -1,0 +1,98 @@
+server:
+  port: 8081
+  error:
+    include-binding-errors: always
+    include-message: always
+    include-stacktrace: always
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/your_database_name
+    username: your_username
+    password: your_password
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 500MB
+      max-request-size: 500MB
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: yourmail@gmail.com  # de?i?ecek
+    password: pass
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  jackson:
+    time-zone: Europe/Istanbul
+# App Properties
+management: #actuator
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+      base-path: /actuator
+  info:
+    env:
+      enabled: true
+  endpoint:
+    health:
+      show-details: always
+    shutdown:
+      enabled: true
+  share:
+    app:
+      jwtSecret: 5Xz3Pb8+fttP9V1phnx5hOqWzHj2fFg14jSt+zBQquOe2c0qGZ7m+NqzNH5sDhq1zqD1+8Am00uP7XujMxw5yDsg8Rh3yPppT2yAl4h0eEOB2LZZnLQDb3ZPz3Jt5g==
+      jwtExpirationMs: 2592000000
+      mailAddress: yourmail@gmail.com
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+        web: DEBUG
+      hibernate:
+        SQL: debug
+        tool:
+          hbm2ddl: debug
+info:
+  application:
+    name: 'Share Backend App'
+    description: 'This is Share Backend Project'
+    version: '@project.version@'
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+    tagsSorter: alpha
+
+application:
+  bucket:
+    name: bucket_name
+    url: bucket_url  # burada tutulacak
+    cdn: cdn_url     # buradan çekilecek
+
+cloud:
+  aws:
+    credentials:
+      access-key: access_key_value
+      secret-key: secret_key_value
+    region:
+      static: eu-east-1
+    stack:
+      auto: false
